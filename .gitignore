@@ -1,1 +1,10 @@
-/.vs
+.vs
+__pycache__
+/Include/rsg/Mesh.h
+/Include/rsg/NodeGeometry.h
+/Include/rsg/Scene.h
+/Include/rsg/SceneLayer.h
+/Src/Scene.cpp
+/Src/SceneLayer.cpp
+/Src/Mesh.cpp
+/Src/NodeGeometry.cpp

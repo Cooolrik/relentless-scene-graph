@@ -5,13 +5,11 @@ VisualStudioVersion = 16.0.32413.511
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B474F37C-11D6-4575-8992-F211BDF865BC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pds_Tests", "Dependencies\PDS\Tests\Tests.vcxproj", "{9DF1C719-67D0-4CC4-9693-04C18DC47B9C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pds_Tests", "Dependencies\persistent-ds\Tests\Tests.vcxproj", "{9DF1C719-67D0-4CC4-9693-04C18DC47B9C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ctle_unit_tests", "Dependencies\PDS\Dependencies\ctle\unit_tests\unit_tests.vcxproj", "{6EB76EA0-651A-42AA-9896-77B76B3BD96A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ctle_unit_tests", "Dependencies\persistent-ds\Dependencies\ctle\unit_tests\unit_tests.vcxproj", "{6EB76EA0-651A-42AA-9896-77B76B3BD96A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pds", "pds", "{8B4910FF-1A5F-42DD-8831-ADF08E2710A9}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pds", "Dependencies\PDS\Src\pds.vcxproj", "{4D13E31B-E498-4995-AAFB-EA352C2729BF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "rsg", "Src\rsg.vcxproj", "{4D13E31B-E498-4995-AAFB-EA352C2729BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,7 +36,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{9DF1C719-67D0-4CC4-9693-04C18DC47B9C} = {B474F37C-11D6-4575-8992-F211BDF865BC}
 		{6EB76EA0-651A-42AA-9896-77B76B3BD96A} = {B474F37C-11D6-4575-8992-F211BDF865BC}
-		{4D13E31B-E498-4995-AAFB-EA352C2729BF} = {8B4910FF-1A5F-42DD-8831-ADF08E2710A9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4D934737-AC1F-43A0-9DE5-5154CD9BDDD5}
