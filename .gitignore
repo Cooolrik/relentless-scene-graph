@@ -8,3 +8,4 @@ __pycache__
 /Src/SceneLayer.cpp
 /Src/Mesh.cpp
 /Src/NodeGeometry.cpp
+/Src/*.user
