@@ -2,7 +2,7 @@
 # Licensed under the MIT license https://github.com/Cooolrik/relentless-sg/blob/main/LICENSE
 
 from EntitiesHelpers import *
-from rsg_CodeGen import Items
+from Items import Items
 
 Items.append(
     Item(

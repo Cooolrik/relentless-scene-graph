@@ -9,13 +9,15 @@ sys.path.append('../Dependencies/persistent-ds/CodeGen')
 import CodeGeneratorHelpers as hlp
 from EntitiesHelpers import *
 
-# set up all items in rsg
-Items = []
-import Nodes.NodeTransform 
+from Items import Items
+
+import Nodes.NodeTransform
 import Nodes.NodeGeometry
-import Scene.Scene 
-import Scene.SceneLayer 
+import Scene.Scene
+import Scene.SceneLayer
 import Geometry.Mesh
 
+package = Package( "rsg" , "../Include/rsg" ,  "../Src" , Items )
+
 # run the generator
-hlp.run_module('EntityGenerator', "../Include/rsg" ,  "../Src" , Items)
+hlp.run_module('PackageGenerator', package)

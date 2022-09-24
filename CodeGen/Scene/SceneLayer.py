@@ -2,7 +2,7 @@
 # Licensed under the MIT license https://github.com/Cooolrik/relentless-sg/blob/main/LICENSE
 
 from EntitiesHelpers import *
-from rsg_CodeGen import Items
+from Items import Items
 
 Items.append(
     Entity(
@@ -11,8 +11,8 @@ Items.append(
         dependencies = [ Dependency("pds","DirectedGraph", include_in_header = True),
                          Dependency("pds","ItemTable", include_in_header = True),
                          Dependency("pds","BidirectionalMap", include_in_header = True),
-                         Dependency("pds","NodeTransform", include_in_header = True),
-                         Dependency("pds","NodeGeometry", include_in_header = True) 
+                         Dependency("rsg","NodeTransform", include_in_header = True),
+                         Dependency("rsg","NodeGeometry", include_in_header = True) 
                          ],
 
         templates = [ Template("scene_graph", template = "DirectedGraph", types = ["item_ref"], flags = ["Acyclic","Rooted"]),
