@@ -14,7 +14,9 @@ add_library( relentless-sg
 			 )
 			
 target_include_directories( relentless-sg PUBLIC
-							"${PROJECT_SOURCE_DIR}/include"
+							"${PROJECT_SOURCE_DIR}/Include"
+
+							# dependencies							
 							"${PROJECT_SOURCE_DIR}/Dependencies/persistent-ds/Include"
 							"${PROJECT_SOURCE_DIR}/Dependencies/persistent-ds/Dependencies/ctle"
 							"${PROJECT_SOURCE_DIR}/Dependencies/persistent-ds/Dependencies/fast_float/include"
