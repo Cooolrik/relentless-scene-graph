@@ -9,3 +9,7 @@ __pycache__
 /Src/Mesh.cpp
 /Src/NodeGeometry.cpp
 /Src/*.user
+/build
+/Include/rsg/NodeTransform.h
+/Include/rsg/rsg.h
+/Src/NodeTransform.cpp
