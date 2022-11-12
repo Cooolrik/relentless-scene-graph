@@ -8,11 +8,7 @@ v1_0.append(
     NewEntity(
         name = "Mesh", 
 
-        dependencies = [ Dependency("ItemTable", include_in_header = True),
-                         Dependency("BidirectionalMap", include_in_header = True),
-                         Dependency("IndexedVector", include_in_header = True),
-                         Dependency("Varying"),
-                         ],
+        dependencies = [],
 
         templates = [ Template("attribute_layers_fvec2", template = "ItemTable", types = ["string","IndexedVector<fvec2>"] ),
                       Template("attribute_layers_fvec3", template = "ItemTable", types = ["string","IndexedVector<fvec3>"] ),

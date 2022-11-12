@@ -7,7 +7,7 @@ from Versions import v1_0
 v1_0.append(
     NewEntity(
         name = "Scene", 
-        dependencies = [ Dependency("BidirectionalMap", include_in_header = True) ],
+        dependencies = [],
 
         templates = [ Template("scene_layers", template = "BidirectionalMap", types = ["entity_ref","string"] ) ],
 

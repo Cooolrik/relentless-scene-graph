@@ -8,10 +8,7 @@ v1_0.append(
     NewEntity(
         name = "SceneLayer", 
         
-        dependencies = [ Dependency("DirectedGraph", include_in_header = True),
-                         Dependency("ItemTable", include_in_header = True),
-                         Dependency("BidirectionalMap", include_in_header = True),
-                         Dependency("NodeTransform", include_in_header = True),
+        dependencies = [ Dependency("NodeTransform", include_in_header = True),
                          Dependency("NodeGeometry", include_in_header = True) 
                          ],
 
