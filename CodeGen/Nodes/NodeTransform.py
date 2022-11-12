@@ -2,12 +2,12 @@
 # Licensed under the MIT license https://github.com/Cooolrik/relentless-sg/blob/main/LICENSE
 
 from EntitiesHelpers import *
-from Items import Items
+from Versions import v1_0
 
-Items.append(
-    Item(
+v1_0.append(
+    NewItem(
         name = "NodeTransform", 
-        dependencies = [ Dependency("pds","DataValuePointers", include_in_header = True) ],
+        dependencies = [ Dependency("DataValuePointers", include_in_header = True) ],
         variables = [ Variable("fvec3", "Translation"),
                       Variable("fvec3", "Rotation"),
                       Variable("fvec3", "Scale") ]

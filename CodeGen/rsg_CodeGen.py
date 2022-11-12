@@ -9,7 +9,7 @@ sys.path.append('../Dependencies/persistent-ds/CodeGen')
 import CodeGeneratorHelpers as hlp
 from EntitiesHelpers import *
 
-from Items import Items
+from Versions import v1_0
 
 import Nodes.NodeTransform
 import Nodes.NodeGeometry
@@ -17,7 +17,12 @@ import Scene.Scene
 import Scene.SceneLayer
 import Geometry.Mesh
 
-package = Package( "rsg" , "../Include/rsg" ,  "../Src" , Items )
+rsg = Package( "rsg", 
+	path = "../Include/rsg", 
+	versions = [  
+		Version( "v1_0", previousVersion = None, items = v1_0 ) 
+		] 
+	)
 
-# run the generator
-hlp.run_module('PackageGenerator', package)
+hlp.run_module('PackageGenerator', rsg, "Latest" )
+

@@ -13,3 +13,7 @@ __pycache__
 /Include/rsg/NodeTransform.h
 /Include/rsg/rsg.h
 /Src/NodeTransform.cpp
+/Include/rsg/v1_0
+/Include/rsg/rsg.cpp
+/Include/rsg/rsgPackageHandler.inl
+/Include/rsg/pdsImportsAndDefines.h

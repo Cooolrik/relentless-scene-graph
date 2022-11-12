@@ -2,12 +2,12 @@
 # Licensed under the MIT license https://github.com/Cooolrik/relentless-sg/blob/main/LICENSE
 
 from EntitiesHelpers import *
-from Items import Items
+from Versions import v1_0
 
-Items.append(
-    Entity(
+v1_0.append(
+    NewEntity(
         name = "Scene", 
-        dependencies = [ Dependency("pds","BidirectionalMap", include_in_header = True) ],
+        dependencies = [ Dependency("BidirectionalMap", include_in_header = True) ],
 
         templates = [ Template("scene_layers", template = "BidirectionalMap", types = ["entity_ref","string"] ) ],
 

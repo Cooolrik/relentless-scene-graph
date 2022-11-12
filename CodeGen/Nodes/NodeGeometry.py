@@ -2,10 +2,10 @@
 # Licensed under the MIT license https://github.com/Cooolrik/relentless-sg/blob/main/LICENSE
 
 from EntitiesHelpers import *
-from Items import Items
+from Versions import v1_0
 
-Items.append(
-    Item(
+v1_0.append(
+    NewItem(
         name = "NodeGeometry", 
         variables = [ Variable("entity_ref" , "Geometry") ]
         )
