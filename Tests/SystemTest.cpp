@@ -7,34 +7,69 @@
 #include <pds/Varying.inl>
 
 #include <rsg/Scene.h>
+#include <rsg/SceneLayer.h>
 #include <rsg/Mesh.h>
 
 #pragma warning( disable : 4189 )
 
+pds::EntityHandler *eh;
+
+rsg::entity_ref MakeGeom()
+	{
+	rsg::Mesh mesh;
+	
+	mesh.Coords().index().resize( 100 );
+	mesh.Coords().values().resize( 30 );
+	
+	auto res = eh->AddEntity( std::make_shared<rsg::Mesh>(mesh) );
+	return res.first;
+	}
+
+rsg::entity_ref MakeSceneLayer()
+	{
+	rsg::SceneLayer layer;
+	rsg::item_ref ref;
+
+	ref = rsg::item_ref::make_ref();
+	layer.Geometries().Insert( ref ).Geometry() = MakeGeom();
+	layer.Nodes().insert( ref, "geom1" );
+
+	ref = rsg::item_ref::make_ref();
+	layer.Geometries().Insert( ref ).Geometry() = MakeGeom();
+	layer.Nodes().insert( ref, "geom2" );
+
+	ref = rsg::item_ref::make_ref();
+	layer.Geometries().Insert( ref ).Geometry() = MakeGeom();
+	layer.Nodes().insert( ref, "geom3" );
+
+	auto res = eh->AddEntity( std::make_shared<rsg::SceneLayer>(layer) );
+	return res.first;
+	}
+
+rsg::entity_ref MakeScene()
+	{
+	rsg::Scene scene;
+
+	scene.Layers().insert( MakeSceneLayer(), "layer1" );
+	scene.Layers().insert( MakeSceneLayer(), "layer2" );
+	scene.Layers().insert( MakeSceneLayer(), "layer3" );
+
+	auto res = eh->AddEntity( std::make_shared<rsg::Scene>(scene) );
+	return res.first;
+	}
+
 int main()
 	{
-	pds::EntityHandler eh;
+	eh = new pds::EntityHandler();
 
-	if( eh.Initialize( "./TestFolder", { rsg::GetPackageRecord() } ) != pds::Status::Ok )
+	if( eh->Initialize( "./TestFolder", { rsg::GetPackageRecord() } ) != pds::Status::Ok )
 		return -1;
 
-	//rsg::Mesh mesh;
-	//
-	//mesh.Coords().index().resize( 100000000 );
-	//mesh.Coords().values().resize( 30000000 );
-	//
-	//auto ref = eh.AddEntity( std::make_shared<rsg::Mesh>(mesh) );
+	MakeScene();
+	
+	eh->UnloadNonReferencedEntities();
 
-	auto ref = pds::entity_ref( hex_string_to_value<hash>( "1a44dec174c347ace1455c0014e4a168de1cfe42cfae69c3af4692f1b13c419e" ) );
-	auto fut = eh.LoadEntity( ref );
-	auto pmesh = rsg::Mesh::MF::EntitySafeCast( eh.GetLoadedEntity( ref ) );
-	auto &mesh = *(pmesh);
-
-	std::cout << "size: " << mesh.Coords().index().size() << std::endl;
-
-	eh.UnloadNonReferencedEntities();
-
-	std::cout << "size: " << mesh.Coords().index().size() << std::endl;
+	delete eh;
 
 	return 0;
 	}

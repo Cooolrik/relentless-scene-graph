@@ -18,8 +18,7 @@ v1_0.append(
                       Template("nodes_geometry", template = "ItemTable", types = ["item_ref","NodeGeometry"] ) 
                       ],
 
-        variables = [ Variable("string", "Name" ),
-                      Variable("scene_graph" , "Graph"),
+        variables = [ Variable("scene_graph" , "Graph"),
                       Variable("nodes_name" , "Nodes"),
                       Variable("nodes_transform" , "Transforms"),
                       Variable("nodes_geometry" , "Geometries") 
