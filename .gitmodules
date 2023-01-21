@@ -1,3 +1,0 @@
-[submodule "Dependencies/persistent-ds"]
-	path = Dependencies/persistent-ds
-	url = https://github.com/Cooolrik/persistent-ds.git

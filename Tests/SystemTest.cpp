@@ -58,6 +58,36 @@ rsg::entity_ref MakeScene()
 	return res.first;
 	}
 
+#include <windows.h>
+#include <tlhelp32.h>
+
+/**
+Returns the thread count of the current process or -1 in case of failure.
+*/
+int GetCurrentThreadCount()
+	{
+	// first determine the id of the current process
+	DWORD const  id = GetCurrentProcessId();
+
+	// then get a process list snapshot.
+	HANDLE const  snapshot = CreateToolhelp32Snapshot( TH32CS_SNAPALL, 0 );
+
+	// initialize the process entry structure.
+	PROCESSENTRY32 entry = { 0 };
+	entry.dwSize = sizeof( entry );
+
+	// get the current process info.
+	BOOL  ret = true;
+	ret = Process32First( snapshot, &entry );
+	while( ret && entry.th32ProcessID != id ) {
+		ret = Process32Next( snapshot, &entry );
+		}
+	CloseHandle( snapshot );
+	return ret 
+		?   entry.cntThreads
+		:   -1;
+	}
+
 int main()
 	{
 	eh = new pds::EntityHandler();
@@ -65,8 +95,33 @@ int main()
 	if( eh->Initialize( "./TestFolder", { rsg::GetPackageRecord() } ) != pds::Status::Ok )
 		return -1;
 
-	MakeScene();
+	std::vector<std::future<std::pair<pds::entity_ref, pds::Status>>> futures;
 	
+	for( uint inx = 0; inx < 2000; ++inx )
+		{
+		rsg::Mesh mesh;
+	
+		mesh.Coords().index().resize( 10000 );
+		mesh.Coords().values().resize( 3000 );
+		mesh.Normals().Insert( "normals" );
+		mesh.Normals()["normals"].index().resize(10000);
+		mesh.Normals()["normals"].values().resize( 3000+inx );
+
+		futures.emplace_back( std::move(eh->AddEntityAsync( std::make_shared<rsg::Mesh>( mesh ) )) );
+		}
+		
+	for( size_t inx =0; inx<futures.size(); ++inx )
+		{
+		if( (inx % 100) == 0 )
+			{
+			std::cout << "Inx: " << inx << std::endl;
+			std::cout << "Num threads: " << GetCurrentThreadCount() << std::endl;
+			}
+		futures[inx].wait();
+		}
+
+	std::cout << "all done" << std::endl;
+
 	eh->UnloadNonReferencedEntities();
 
 	delete eh;
