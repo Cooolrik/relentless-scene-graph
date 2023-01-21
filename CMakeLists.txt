@@ -1,10 +1,9 @@
 cmake_minimum_required(VERSION 3.21)
-
-include(FetchContent)
-
-set( CMAKE_DEBUG_POSTFIX _d )
-
 project( relentless-sg )
+
+find_package(PythonInterp REQUIRED)
+find_package(Python REQUIRED)
+include(FetchContent)
 
 # pds 
 FetchContent_Declare(
@@ -12,16 +11,15 @@ FetchContent_Declare(
 	GIT_REPOSITORY https://github.com/Cooolrik/persistent-ds.git
 	GIT_TAG        main
 )
-
-# lots of warnings and all warnings as errors
-# big object files
-if(MSVC)
-    add_compile_options(/W4 /WX)
-	add_compile_options(/bigobj)
-else()
-    add_compile_options(-Wall -Wextra -pedantic -Werror)
-	add_compile_options(-Wa,-mbig-obj)
-endif()
+FetchContent_MakeAvailable( pds )
+	
+# generate the rsg code
+execute_process( 
+	COMMAND 			${PYTHON_EXECUTABLE} rsg_CodeGen.py ${pds_SOURCE_DIR}/CodeGen
+	WORKING_DIRECTORY 	${CMAKE_CURRENT_LIST_DIR}/CodeGen
+	RESULT_VARIABLE 	py_result
+)
+message(STATUS "Result of rsg_CodeGen.py: ${py_result}")
 
 # if this is the main build of rsg, build the testing code
 if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)			
@@ -40,6 +38,17 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 		librocksha256 
 		googletest 
 		)
+
+	# lots of warnings and all warnings as errors
+	# big object files
+	if(MSVC)
+		add_compile_options(/W4 /WX)
+		add_compile_options(/bigobj)
+	else()
+		add_compile_options(-Wall -Wextra -pedantic -Werror)
+		add_compile_options(-Wa,-mbig-obj)
+	endif()
+	set( CMAKE_DEBUG_POSTFIX _d )
 	
 	# SystemTest run full system tests
 	add_executable( systemtest
@@ -52,7 +61,7 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 								# direct dependencies and dependencies of pds
 								PUBLIC ${pds_SOURCE_DIR}/Include
 								PUBLIC ${glm_SOURCE_DIR}
-								PUBLIC ${librocksha256_SOURCE_DIR}/include
+								PUBLIC ${librocksha256_SOURCE_DIR}
 								PUBLIC ${ctle_SOURCE_DIR}
 								)
 	target_link_libraries( 	systemtest 

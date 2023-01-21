@@ -3,7 +3,9 @@
 
 # add an import path to the code generator in pds
 import sys
-sys.path.append('../Dependencies/persistent-ds/CodeGen')
+if len(sys.argv) > 1:
+	print("Adding code generator folder: " + sys.argv[1])
+	sys.path.append(sys.argv[1])
 
 # import the code generators
 import CodeGeneratorHelpers as hlp
