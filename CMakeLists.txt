@@ -35,7 +35,7 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 		pds 
 		glm
 		ctle 
-		librocksha256 
+		librock_sha256 
 		googletest 
 		)
 
@@ -61,7 +61,7 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 								# direct dependencies and dependencies of pds
 								PUBLIC ${pds_SOURCE_DIR}/Include
 								PUBLIC ${glm_SOURCE_DIR}
-								PUBLIC ${librocksha256_SOURCE_DIR}
+								PUBLIC ${librock_sha256_SOURCE_DIR}
 								PUBLIC ${ctle_SOURCE_DIR}
 								)
 	target_link_libraries( 	systemtest 
